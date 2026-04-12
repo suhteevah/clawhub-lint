@@ -125,6 +125,31 @@ discover_files() {
 }
 
 # ============================================================================
+# Language Affinity — which tools apply to which file types
+# ============================================================================
+
+# Tools that target web/scripting languages (JS/TS/Python/Ruby/PHP) and should
+# NOT run against compiled languages (Rust, Go, C, C++, Java)
+declare -A WEB_ONLY_TOOLS=(
+  [inputshield]=1 [errorlens]=1 [asyncguard]=1 [httplint]=1
+  [bundlephobia]=1 [featurelint]=1 [i18ncheck]=1 [gqllint]=1
+  [memguard]=1 [styleguard]=1 [deadcode]=1 [testgap]=1
+)
+
+# Tools that are language-agnostic (grep patterns work on any source)
+# Everything NOT in WEB_ONLY_TOOLS runs on all files.
+
+# Compiled language extensions that web-only tools should skip
+is_compiled_lang() {
+  local filepath="$1"
+  local ext="${filepath##*.}"
+  case "$ext" in
+    rs|go|c|h|cpp|hpp|cc|cxx|java|cs|swift|kt|scala|zig) return 0 ;;
+  esac
+  return 1
+}
+
+# ============================================================================
 # Pattern Loading & Scanning
 # ============================================================================
 
@@ -169,9 +194,16 @@ scan_file() {
   local filepath="$1"
   local min_severity="$2"
   local findings=0
+  local is_compiled=false
+  is_compiled_lang "$filepath" && is_compiled=true
 
   for pattern_entry in "${ALL_PATTERNS[@]}"; do
     local tool_name="${pattern_entry%%|*}"
+
+    # Skip web-only tools on compiled languages
+    if $is_compiled && [[ -n "${WEB_ONLY_TOOLS[$tool_name]+x}" ]]; then
+      continue
+    fi
     local rest="${pattern_entry#*|}"
     local regex="${rest%%|*}"
     rest="${rest#*|}"
