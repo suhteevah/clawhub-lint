@@ -165,29 +165,18 @@ load_tool_patterns() {
     return 1
   fi
 
-  # Extract pattern lines (lines containing |severity|)
+  # Extract patterns via grep — avoids bash quoting issues from sourcing
+  # Pattern lines contain |severity| and look like: 'REGEX|SEVERITY|CHECK_ID|DESC|REC'
   while IFS= read -r line; do
-    # Skip comments and empty lines
-    [[ "$line" =~ ^[[:space:]]*# ]] && continue
-    [[ "$line" =~ ^[[:space:]]*$ ]] && continue
-    [[ "$line" =~ ^[[:space:]]*\) ]] && continue
-    [[ "$line" =~ ^[[:space:]]*declare ]] && continue
-    [[ "$line" =~ ^[[:space:]]*set ]] && continue
-    [[ "$line" =~ ^[[:space:]]*source ]] && continue
-    [[ "$line" =~ ^\#!/ ]] && continue
-    [[ "$line" =~ _PATTERNS\+= ]] && continue
-
-    # Clean up: remove leading quote, trailing quote
-    line="${line#*\'}"
-    line="${line%\'*}"
-    line="${line#*\"}"
-    line="${line%\"*}"
-
-    # Only keep lines that match the pattern format
-    if echo "$line" | grep -qE '\|(critical|high|medium|low)\|'; then
-      ALL_PATTERNS+=("$tool_name|$line")
-    fi
-  done < "$patterns_file"
+    # Strip leading/trailing whitespace and quotes
+    line="${line#"${line%%[![:space:]]*}"}"
+    line="${line%"${line##*[![:space:]]}"}"
+    line="${line#\'}"
+    line="${line%\'}"
+    line="${line#\"}"
+    line="${line%\"}"
+    [ -n "$line" ] && ALL_PATTERNS+=("$tool_name|$line")
+  done < <(grep -E '\|(critical|high|medium|low)\|' "$patterns_file" 2>/dev/null | sed "s/^[[:space:]]*['\"]//;s/['\"][[:space:]]*$//")
 }
 
 scan_file() {
