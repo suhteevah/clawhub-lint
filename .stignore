@@ -1,0 +1,19 @@
+// auto-managed by setup-syncthing-folders.py — do not edit
+**/target
+**/node_modules
+**/.next
+**/dist
+**/build
+**/__pycache__
+**/.git/objects
+**/.git/lfs
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+*.lib
+**/.env
+**/.env.local
+**/.env.*.local
+**/secrets/

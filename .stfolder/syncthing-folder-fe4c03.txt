@@ -1,0 +1,5 @@
+# This directory is a Syncthing folder marker.
+# Do not delete.
+
+folderID: clawhub-lint
+created: 2026-05-03T21:27:36-07:00
