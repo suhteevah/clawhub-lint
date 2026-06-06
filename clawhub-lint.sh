@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # clawhub-lint — Unified static analysis suite
-# 39 analyzers | 1,600+ patterns | POSIX grep-based | Zero dependencies
+# 39 analyzers | 3,453 patterns | POSIX grep-based | Zero dependencies
 #
 # Usage:
 #   clawhub-lint scan <path> [--tools all|tool1,tool2,...] [--format text|json] [--verbose]
@@ -31,7 +31,7 @@ NC='\033[0m'
 # ============================================================================
 
 usage() {
-  echo -e "${BOLD}clawhub-lint${NC} v${VERSION} — 39 analyzers, 1,600+ patterns"
+  echo -e "${BOLD}clawhub-lint${NC} v${VERSION} — 39 analyzers, 3,453 patterns"
   echo ""
   echo "Usage:"
   echo "  clawhub-lint scan <path> [OPTIONS]"

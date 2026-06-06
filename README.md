@@ -1,6 +1,6 @@
 # clawhub-lint
 
-**3,348 patterns. 39 analyzers. Zero dependencies. One command.**
+**3,453 patterns. 39 analyzers. Zero dependencies. One command.**
 
 A unified static analysis suite that scans codebases for anti-patterns, security issues, and code quality problems across 39 categories. Pure Bash, POSIX grep-based, runs anywhere.
 
@@ -41,6 +41,7 @@ A unified static analysis suite that scans codebases for anti-patterns, security
 | cryptolint | 90 | Cryptography misuse, weak algorithms |
 | dateguard | 90 | Date/time bugs, timezone issues |
 | deadcode | 98 | Dead code, unused exports |
+| designlint | 15 | DESIGN.md format hygiene |
 | doccoverage | 86 | Documentation gaps |
 | envguard | 76 | Environment variable security |
 | errorlens | 90 | Error handling anti-patterns |
@@ -50,22 +51,24 @@ A unified static analysis suite that scans codebases for anti-patterns, security
 | httplint | 90 | HTTP client/server misconfig |
 | i18ncheck | 90 | Internationalization readiness |
 | inputshield | 90 | Input validation & sanitization |
-| licenseguard | 90 | License compliance |
 | logsentry | 90 | Logging quality & observability |
 | memguard | 90 | Memory leaks & resource management |
-| migratesafe | 90 | Database migration safety |
-| perfguard | 90 | Performance anti-patterns |
+| migratesafe | 63 | Database migration safety |
+| perfguard | 97 | Performance anti-patterns |
 | pipelinelint | 90 | CI/CD pipeline issues |
 | ratelint | 90 | Rate limiting anti-patterns |
 | regexguard | 90 | Regex safety, ReDoS risks |
 | retrylint | 90 | Retry & resilience patterns |
 | schemalint | 90 | Schema validation issues |
-| secretscan | 90 | Hardcoded secrets, API keys |
+| secretscan | 102 | Hardcoded secrets, API keys |
 | serdelint | 90 | Serialization anti-patterns |
-| sqlguard | 90 | SQL injection & query safety |
-| styleguard | 90 | Code style & naming conventions |
-| testgap | 98 | Test coverage gaps |
-| typedrift | 90 | Type safety & drift issues |
+| sqlguard | 98 | SQL injection & query safety |
+| styleguard | 92 | Code style & naming conventions |
+| testgap | 99 | Test coverage gaps |
+| typedrift | 74 | Type safety & drift issues |
+
+> A 40th module, `licenseguard` (license compliance), ships in `tools/` but is pending
+> integration with the unified loader (it uses a separate record schema) and is not counted above.
 
 ## Scoring
 
@@ -88,108 +91,6 @@ These 39 analyzers were originally shipped as individual repos (4+ per day) by M
 ## License
 
 MIT
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
 
 ## Support This Project
 
