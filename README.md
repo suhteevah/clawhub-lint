@@ -92,6 +92,8 @@ These 39 analyzers were originally shipped as individual repos (4+ per day) by M
 
 MIT
 
+---
+
 ## Support This Project
 
 If you find this project useful, consider buying me a coffee! Your support helps me keep building and sharing open-source tools.
